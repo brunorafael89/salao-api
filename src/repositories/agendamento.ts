@@ -2,7 +2,9 @@ import db from '../database/connection';
 
 export default class AgendamentoRepository {
     async show(): Promise<any[]> {
-        return await db('dbo.agendamento').where({});
+        return await db('dbo.agendamento').where({}).join('dbo.profissional', { 
+            'dbo.profissional.profissional_id': 'dbo.agendamento.funcionario_id' 
+        });
     }
 
     async findID(agendamento_id: number): Promise<any[]> {

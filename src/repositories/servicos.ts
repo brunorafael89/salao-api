@@ -17,12 +17,13 @@ export default class ServicosRepository {
         return await db('dbo.servicos').where({ servicos_id: servicos_id }).del();
     }
 
-    async create(nome: string, valor: number, comissao: number, tempo_servico: string): Promise<any[]> {
+    async create(nome: string, valor: number, comissao: number, tempo_servico: string, funcao_id:string): Promise<any[]> {
         return await db('dbo.servicos').insert({
             nome, 
             valor, 
             comissao, 
-            tempo_servico
+            tempo_servico,
+            funcao_id
         })
     }
 

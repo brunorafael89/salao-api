@@ -42,7 +42,7 @@ class ClienteController {
     const cpfEncontrado = await clienteRepository.findCpf(cpf);
 
     if (cpfEncontrado)
-      msg.push("cadastrado não pode ser realizado porque o CPF já existe.")
+      msg.push("cadastro não pode ser realizado porque o CPF já existe.")
     
 
     if(msg.length) return response.status(401).json({ erro: msg })

@@ -1,8 +1,9 @@
 import db from '../database/connection';
+import tabelas from '../constants/tabelas';
 
 export default class UsuarioRepository {
     async show(): Promise<any[]> {
-        return await db('dbo.usuario').where({});
+        return await db(tabelas.usuario).where({});
     }
 
     async findID(usuario_id: number): Promise<any[]> {

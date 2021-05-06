@@ -1,5 +1,5 @@
 import db from '../database/connection';
-import tabelas from "../constants/tabelas";
+import tabelas from '../constants/tabelas';
 
 export default class UsuarioRepository {
     async show(): Promise<any[]> {

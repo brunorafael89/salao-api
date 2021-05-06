@@ -18,12 +18,13 @@ export default class ServicosRepository {
         return await db(tabelas.servicos).where({ servicos_id: servicos_id }).del();
     }
 
-    async create(nome: string, valor: number, comissao: number, tempo_servico: string): Promise<any[]> {
+    async create(nome: string, valor: number, comissao: number, tempo_servico: string, funcao_id:string): Promise<any[]> {
         return await db(tabelas.servicos).insert({
-            nome: nome, 
-            valor: valor, 
-            comissao: comissao, 
-            tempo_servico: tempo_servico
+            nome, 
+            valor, 
+            comissao, 
+            tempo_servico,
+            funcao_id
         })
     }
 

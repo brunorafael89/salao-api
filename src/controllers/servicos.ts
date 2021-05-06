@@ -27,13 +27,17 @@ class ServicosController {
 
   public async deletar(request: Request, response: Response): Promise<Response> {
     const servicos_id: number = Number(request.params.servicos_id);
-    await servicosRepository.deletar(servicos_id);
-   
-    return response.send("Serviços excluído com sucesso!");
+    try{
+      await servicosRepository.deletar(servicos_id);
+      return response.send("Serviços excluído com sucesso!");
+    } catch(e){
+      return response.status(400).send('Erro ao excluir serviço!');
+    }
+    
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { nome, valor, comissao, tempo_servico } = request.body;
+    const { nome, valor, comissao, tempo_servico, funcao_id } = request.body;
 
     const servicosEncontrado = await servicosRepository.findNome(nome);
 
@@ -44,7 +48,7 @@ class ServicosController {
     
     if(msg.length) return response.status(401).json({ erro: msg })
 
-    await servicosRepository.create( nome, valor, comissao, tempo_servico);
+    await servicosRepository.create( nome, valor, comissao, tempo_servico, funcao_id);
    
     return response.send("Serviço adicionado com sucesso!");
     

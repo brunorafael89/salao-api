@@ -12,7 +12,7 @@ export default async (
       cpf: Yup.string().required('CPF é um campo obrigatório')
         .max(11, "O cpf só pode ter no máximo 11 números")
         .min(11, "O cpf deve ter no mínimo 11 números"),
-      data_nasc: Yup.string().required(
+      data_nasc: Yup.date().required(
         'Data de nascimento é um campo obrigatório',
       ),
       sexo: Yup.string().required('Sexo é um campo obrigatório'),
@@ -20,8 +20,8 @@ export default async (
       email: Yup.string()
         .email('Email inválido')
         .required('Email é um campo obrigatório'),
-        login: Yup.string().required('Login é um campo obrigatório'),
-        senha: Yup.string().required('Senha é um campo obrigatório'),
+      // login: Yup.string().required('Login é um campo obrigatório'),
+      senha: Yup.string().required('Senha é um campo obrigatório'),
     });
 
     await schema.validate(request.body, { abortEarly: false });

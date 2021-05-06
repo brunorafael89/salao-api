@@ -1,20 +1,21 @@
 import db from '../database/connection';
+import tabelas from "../constants/tabelas";
 
 export default class AgendamentoRepository {
     async show(): Promise<any[]> {
-        return await db('dbo.agendamento').where({});
+        return await db(tabelas.agendamento).where({});
     }
 
     async findID(agendamento_id: number): Promise<any[]> {
-        return await db('dbo.agendamento').where({ agendamento_id: agendamento_id }).first();
+        return await db(tabelas.agendamento).where({ agendamento_id: agendamento_id }).first();
     }
 
     async deletar(agendamento_id: number): Promise<any[]> {
-        return await db('dbo.agendamento').where({ agendamento_id: agendamento_id }).del();
+        return await db(tabelas.agendamento).where({ agendamento_id: agendamento_id }).del();
     }
 
     async create(funcionario_id: number, cliente_id: number, data_atendimento: Date, inicio_atendimento: Date, total: number, data_agendamento: Date, horario_agendamento: Date): Promise<any[]> {
-        return await db('dbo.agendamento').insert({
+        return await db(tabelas.agendamento).insert({
             funcionario_id,
             cliente_id,
             data_atendimento: new Date(data_atendimento),
@@ -26,7 +27,7 @@ export default class AgendamentoRepository {
     }
 
     async update(agendamento_id: number,  funcionario_id: number, cliente_id: number, data_atendimento: Date, inicio_atendimento: Date, total: number, data_agendamento: Date, horario_agendamento: Date): Promise<any[]> {
-        return await db('dbo.agendamento')
+        return await db(tabelas.agendamento)
             .where({ agendamento_id: agendamento_id })
             .update({
                 funcionario_id,

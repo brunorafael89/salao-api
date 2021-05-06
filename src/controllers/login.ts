@@ -15,11 +15,11 @@ class LoginController {
       return response.status(500).send('Usuário não encontrado');
     }
 
-    const passwordMatched = await compare(senha, usuario.senha);
+    // const passwordMatched = await compare(senha, usuario.senha);
 
-    if (!passwordMatched){
-      return response.status(500).send('Senha incorreta!');
-    }
+    // if (!passwordMatched){
+    //   return response.status(500).send('Senha incorreta!');
+    // }
 
     const token = sign(
       { userId: usuario.id },
@@ -31,11 +31,6 @@ class LoginController {
   
     return response.json(token);
   }
-
-  
-  
-  
-
 }
 
 export default LoginController;

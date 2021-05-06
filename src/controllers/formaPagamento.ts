@@ -17,16 +17,16 @@ class FormaPagamentoController {
 
   
   public async findID(request: Request, response: Response): Promise<Response> {
-    const forma_pagamento_id: number = Number(request.params.forma_pagamento_id);
-    const formaPagamento = await formaPagamentoRepository.findID(forma_pagamento_id);
+    const formaPagamento_id: number = Number(request.params.formaPagamento_id);
+    const formaPagamento = await formaPagamentoRepository.findID(formaPagamento_id);
    
     return response.json(formaPagamento);
   }
 
   public async deletar(request: Request, response: Response): Promise<Response> {
     try{
-      const forma_pagamento_id: number = Number(request.params.forma_pagamento_id);
-      await formaPagamentoRepository.deletar(forma_pagamento_id);
+      const formaPagamento_id: number = Number(request.params.formaPagamento_id);
+      await formaPagamentoRepository.deletar(formaPagamento_id);
     
       return response.send("Forma de pagamento excluído com sucesso!");
     } catch(err){
@@ -35,20 +35,20 @@ class FormaPagamentoController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const forma_pagamento = request.body.forma_pagamento;
+    const formaPagamento = request.body.formaPagamento;
     
-    await formaPagamentoRepository.create(forma_pagamento);
+    await formaPagamentoRepository.create(formaPagamento);
    
-    return response.send("Forma de pagamento adicionada com sucesso!");
+    return response.send("Forma de pagamento adicionado com sucesso!");
   }
 
-  public async update(request: Request, response: Response): Promise<Response> {
-    const forma_pagamento_id: number = Number(request.params.forma_pagamento_id);
-    const forma_pagamento = request.body.forma_pagamento;
+  async update(request: Request, response: Response): Promise<Response> {
+    const formaPagamento_id: number = Number(request.params.formaPagamento_id);
+    const formaPagamento = request.body.formaPagamento;
     
-    await formaPagamentoRepository.update(forma_pagamento_id, forma_pagamento);
+    await formaPagamentoRepository.update(formaPagamento_id, formaPagamento);
    
-    return response.send("Forma de pagamento atualizada com sucesso!");
+    return response.send("Forma de pagamento atualizado com sucesso!");
   }
 
 }

@@ -9,7 +9,7 @@ export default async (
   try {
     const schema = Yup.object().shape({
       login: Yup.string().required('Este é um campo obrigatório'), 
-      senha: Yup.string().required('Este um campo obrigatório'), 
+      senha: Yup.string().required('Este é um campo obrigatório'), 
     });
 
     await schema.validate(request.body, { abortEarly: false });

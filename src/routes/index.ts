@@ -27,7 +27,4 @@ routes.use('/formaPagamento', formaPagamentoRouter);
 routes.use('/agendamento', agendamentoRouter);
 
 
-
-
-
 export default routes;

@@ -8,7 +8,7 @@
 // };
 export default {
   host: "localhost",
-  database: "teste02",
+  database: "projetofinalv1",
   user: "postgres",
-  password: "raijin75716",
+  password: "123456",
 };

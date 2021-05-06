@@ -3,7 +3,7 @@ import databaseConfig from './src/config/database';
 
 module.exports = {
   development: {
-    client: 'mysql',
+    client: 'postgres',
     connection: {
       host: databaseConfig.host,
       database: databaseConfig.database,

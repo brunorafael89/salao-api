@@ -30,7 +30,7 @@ class ClienteController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { nome, cpf, data_nasc, sexo, telefone, email, login, senha } = request.body;
+    const { nome, cpf, data_nasc, sexo, telefone, email, senha } = request.body;
 
     const clienteEncontrado = await clienteRepository.findEmail(email);
 
@@ -52,7 +52,7 @@ class ClienteController {
 
     const newSenha = await hash(senha, 8);
 
-    await usuarioRepository.create(1, cliente_id, login, newSenha); 
+    await usuarioRepository.create(1, cliente_id, email, newSenha); 
    
     return response.send("Cliente adicionado com sucesso!");
     

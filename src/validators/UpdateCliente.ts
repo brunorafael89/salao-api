@@ -20,7 +20,6 @@ export default async (
       email: Yup.string()
         .email('Email inválido')
         .required('Email é um campo obrigatório'),
-        senha: Yup.string().required('Senha é um campo obrigatório'),
     });
 
     await schema.validate(request.body, { abortEarly: false });

@@ -14,6 +14,7 @@ const db = knex({
     password: "123456",
   },
   useNullAsDefault: true,
+  debug: true
 });
 
 export default db;

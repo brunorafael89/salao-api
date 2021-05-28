@@ -13,8 +13,8 @@ class ProfissionalFuncaoController {
   public async findFuncao(request: Request, response: Response): Promise<Response> {
     const funcao_id: number = Number(request.params.funcao_id);
     const profissionalFuncao = await profissionalFuncaoRepository.findFuncao(funcao_id);
-   
-     return response.json(profissionalFuncao);
+   console.log(profissionalFuncao)
+    return response.json(profissionalFuncao);
    }
   public async findProfissional(request: Request, response: Response): Promise<Response> {
     const profissional_id: number = Number(request.params.profissional_id);

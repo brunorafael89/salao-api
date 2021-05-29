@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
 import AgendamentoRepository from '../repositories/agendamento';
+import ServicoAgendamentoRepository from '../repositories/servicoAgendamento';
 
 const agendamentoRepository = new AgendamentoRepository();
+const servicoAgendamentoRepository = new ServicoAgendamentoRepository();
 
 class AgendamentoController {
   public async show(request: Request, response: Response): Promise<Response> {
@@ -27,7 +29,7 @@ class AgendamentoController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { agendamento_id, funcionario_id, cliente_id, data_atendimento, inicio_atendimento, total, data_agendamento, horario_agendamento } = request.body;
+    const { servico_id, funcionario_id, profissional_id, cliente_id, data_atendimento, inicio_atendimento, total, data_agendamento, horario_agendamento } = request.body;
 
     // const agendamentoEncontrado = await agendamentoRepository.findID(agendamento_id);
 
@@ -38,8 +40,12 @@ class AgendamentoController {
 
     // if(msg.length) return response.status(401).json({ erro: msg })
 
-    await agendamentoRepository.create(funcionario_id, cliente_id, data_atendimento, inicio_atendimento, total, data_agendamento, horario_agendamento);
+    const agendamento_id = await agendamentoRepository.create(funcionario_id, cliente_id, data_atendimento, inicio_atendimento, total, data_agendamento, horario_agendamento);
    
+console.log(agendamento_id)
+
+    await servicoAgendamentoRepository.create(servico_id, Number(agendamento_id[0]), profissional_id);
+
     return response.send("Agendamento adicionado com sucesso!");
     
   }

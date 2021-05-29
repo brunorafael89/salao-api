@@ -14,12 +14,12 @@ export default class PagamentoRepository {
         return await db(tabelas.pagamento).where({ pagamento_id: pagamento_id }).del();
     }
 
-    async create(agendamento_id: number, forma_pagamento_id: number, total: number, autorizado: boolean): Promise<any[]> {
+    async create(agendamento_id: number, forma_pagamento_id: number, total: number): Promise<any[]> {
         return await db(tabelas.pagamento).insert({
             agendamento_id, 
             forma_pagamento_id, 
             total, 
-            autorizado
+            autorizado: false
         })
     }
 

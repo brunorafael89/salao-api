@@ -8,13 +8,12 @@ export default async (
 ) => {
   try {
     const schema = Yup.object().shape({
-      data_atendimento: Yup.string().required('Data é um campo obrigatório'),
+      servico_id: Yup.string().required('Serviço é um campo obrigatório'),
       // inicio_atendimento: Yup.string().required('inicio do atendimento é um campo obrigatório'),
-      data_agendamento: Yup.string().required(
-        'Data do atendimento é um campo obrigatório',
+      agendamento_id: Yup.string().required(
+        'Agendamento do atendimento é um campo obrigatório',
       ),
-      total: Yup.string().required('Valor total é um campo obrigatório'),
-      horario_agendamento: Yup.string().required('horario do agendamento é um campo obrigatório'),
+      profissional_id: Yup.string().required('Profissional é um campo obrigatório'),
     });
 
     await schema.validate(request.body, { abortEarly: false });

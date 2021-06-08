@@ -14,6 +14,19 @@ export default class AgendamentoRepository {
         });
     }
 
+    async getAgendamentoProfissional(profissional_id: Number, data_atendimento: string): Promise<any[]> {
+        return await db('dbo.servico_agendamento').where({ profissional_id: profissional_id })
+        .join('dbo.agendamento', {
+            'dbo.servico_agendamento.agendamento_id': 'dbo.agendamento.agendamento_id'
+        })
+        .where({ data_atendimento: data_atendimento })
+        .join('dbo.servicos', {
+            'dbo.servico_agendamento.servicos_id': 'dbo.servicos.servicos_id'
+        })
+        //.orderBy("horario_agendamento")
+        //.select('dbo.servico_agendamento.agendamento_id', 'dbo.servicos.servicos_id')
+    }
+
     async findID(agendamento_id: number): Promise<any[]> {
         return await db('dbo.agendamento').where({ agendamento_id: agendamento_id }).first();
     }

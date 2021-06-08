@@ -12,6 +12,7 @@ import formaPagamentoRouter from './formaPagamento';
 import pagamentoRouter from './pagamento';
 import agendamentoRouter from './agendamento';
 import profissionalFuncaoRouter from './profissionalFuncao';
+import relatorioRouter from './relatorio';
 
 const routes = Router();
 
@@ -27,6 +28,7 @@ routes.use('/servicos', servicosRouter);
 routes.use('/pagamento', pagamentoRouter);
 routes.use('/formaPagamento', formaPagamentoRouter);
 routes.use('/agendamento', agendamentoRouter);
+routes.use('/relatorio', relatorioRouter);
 
 
 

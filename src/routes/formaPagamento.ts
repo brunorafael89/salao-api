@@ -4,7 +4,7 @@ import ValidatorCreateFormaPagamento from '../validators/CreateFormaPagamento';
 import auth from "../middleware/auth";
 
 const formaPagamentoRouter = Router();
-formaPagamentoRouter.use(auth);
+//formaPagamentoRouter.use(auth);
 
 const formaPagamentoController = new FormaPagamentoController();
 

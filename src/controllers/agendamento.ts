@@ -13,6 +13,14 @@ class AgendamentoController {
     return response.json(agendamento);
   }
 
+  public async getAgendamentoProfissional(request: Request, response: Response): Promise<Response> {
+    const { profissional_id, data_atendimento } = request.params;
+    const agendamento = await agendamentoRepository.getAgendamentoProfissional(Number(profissional_id), data_atendimento);
+  
+
+    return response.json(agendamento);
+  }
+
   
   public async findID(request: Request, response: Response): Promise<Response> {
     const agendamento_id: number = Number(request.params.agendamento_id);

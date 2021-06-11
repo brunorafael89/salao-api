@@ -13,8 +13,14 @@ export default class UsuarioRepository {
         return await db('dbo.usuario').where({ login }).first();
     }
 
+    // async deletar(usuario_id: number): Promise<any[]> {
+    //     return await db('dbo.usuario').where({ usuario_id: usuario_id }).del();
+    // }
+
     async deletar(usuario_id: number): Promise<any[]> {
-        return await db('dbo.usuario').where({ usuario_id: usuario_id }).del();
+        return await db('dbo.usuario')
+            .where({ usuario_id: usuario_id })
+            .update({ ativo: false });
     }
 
     async create( perfil_acesso_id: number, cliente_id: number,login: string, senha: string): Promise<any[]> {
@@ -22,7 +28,8 @@ export default class UsuarioRepository {
             perfil_acesso_id,
             cliente_id,
             login,
-            senha
+            senha,
+            ativo: true
         })
     }
 

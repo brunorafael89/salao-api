@@ -7,7 +7,17 @@ const servicoAgendamentoRepository = new ServicoAgendamentoRepository();
 
 class AgendamentoController {
   public async show(request: Request, response: Response): Promise<Response> {
-   const agendamento = await agendamentoRepository.show();
+    const cliente_id: number = Number(request.params.cliente_id);
+    const agendamento = await agendamentoRepository.show(cliente_id);
+  
+
+    return response.json(agendamento);
+  }
+
+  public async getAgendamentoDataCliente(request: Request, response: Response): Promise<Response> {
+    const cliente_id: number = Number(request.params.cliente_id);
+    const data_atendimento: string = request.params.data_atendimento;
+    const agendamento = await agendamentoRepository.getAgendamentoDataCliente(cliente_id, data_atendimento);
   
 
     return response.json(agendamento);

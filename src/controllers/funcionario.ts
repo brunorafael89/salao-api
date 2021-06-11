@@ -1,7 +1,10 @@
 import { Request, Response } from 'express';
+import { hash } from 'bcryptjs';
 import FuncionarioRepository from '../repositories/funcionario';
+import UsuarioRepository from '../repositories/usuario';
 
 const funcionarioRepository = new FuncionarioRepository();
+const usuarioRepository = new UsuarioRepository();
 
 class FuncionarioController {
   public async show(request: Request, response: Response): Promise<Response> {
@@ -25,7 +28,7 @@ class FuncionarioController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { cargo, nome, cpf, data_nasc, telefone, email } = request.body;
+    const { cargo, nome, cpf, data_nasc, telefone, email, senha } = request.body;
 
     const clienteEncontrado = await funcionarioRepository.findEmail(email);
 
@@ -42,7 +45,12 @@ class FuncionarioController {
 
     if(msg.length) return response.status(401).json({ erro: msg })
 
-    await funcionarioRepository.create(cargo, nome, cpf, data_nasc, telefone, email);
+    const retorno = await funcionarioRepository.create(cargo, nome, cpf, data_nasc, telefone, email);
+    const funcionario_id = retorno[0];
+
+    const newSenha = await hash(senha, 8);
+
+    await usuarioRepository.create(3, funcionario_id, email, newSenha); 
    
     return response.send("Funcionário adicionado com sucesso!");
     

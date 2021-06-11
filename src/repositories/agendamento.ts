@@ -1,9 +1,22 @@
 import db from '../database/connection';
 
 export default class AgendamentoRepository {
-    async show(): Promise<any[]> {
-        return await db('dbo.agendamento').where({ cliente_id: 1})
+    async show(cliente_id: Number): Promise<any[]> {
+        return await db('dbo.agendamento').where({ cliente_id: cliente_id})
         .join('dbo.servico_agendamento', {
+            'dbo.servico_agendamento.agendamento_id': 'dbo.agendamento.agendamento_id'
+        })
+        .join('dbo.servicos', {
+            'dbo.servico_agendamento.servicos_id': 'dbo.servicos.servicos_id'
+        })
+        .join('dbo.profissional', { 
+            'dbo.profissional.profissional_id': 'dbo.servico_agendamento.profissional_id' 
+        });
+    }
+
+    async getAgendamentoDataCliente(cliente_id: Number, data_atendimento: string): Promise<any[]> {
+        return await db('dbo.agendamento').where({ cliente_id: cliente_id, data_atendimento: data_atendimento})
+        .leftJoin('dbo.servico_agendamento', {
             'dbo.servico_agendamento.agendamento_id': 'dbo.agendamento.agendamento_id'
         })
         .join('dbo.servicos', {

@@ -21,6 +21,9 @@ export default class ProfissionalFuncaoRepository {
     async deletar(funcao_id: number, profissional_id: number): Promise<any[]> {
         return await db('dbo.profissional_funcao').where({ funcao_id: funcao_id, profissional_id: profissional_id }).del();
     }
+    async deletarPorProfissional(profissional_id: number): Promise<any[]> {
+        return await db('dbo.profissional_funcao').where({ profissional_id: profissional_id }).del();
+    }
 
     async create(funcao_id: number, profissional_id: number): Promise<any[]> {
         return await db('dbo.profissional_funcao').insert({

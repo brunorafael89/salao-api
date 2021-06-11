@@ -2,10 +2,10 @@ import db from '../database/connection';
 import tabelas from "../constants/tabelas";
 
 export default class AgendamentoRepository {
-    async show(): Promise<any[]> {
-        return await db(tabelas.agendamento).where({ cliente_id: 1})
-        .join(tabelas.servico_agendamento, {
-            'tabelas.servico_agendamento.agendamento_id': 'tabelas.agendamento.agendamento_id'
+    async show(cliente_id: Number): Promise<any[]> {
+        return await db(tabelas.agendamento).where({ cliente_id: cliente_id})
+        .join('servico_agendamento', {
+            'servico_agendamento.agendamento_id': 'agendamento.agendamento_id'
         })
         .join(tabelas.servicos, {
             'tabelas.servico_agendamento.servicos_id': 'tabelas.servicos.servicos_id'
@@ -15,14 +15,27 @@ export default class AgendamentoRepository {
         });
     }
 
+    async getAgendamentoDataCliente(cliente_id: Number, data_atendimento: string): Promise<any[]> {
+        return await db(tabelas.agendamento).where({ cliente_id: cliente_id, data_atendimento: data_atendimento})
+        .leftJoin('servico_agendamento', {
+            'servico_agendamento.agendamento_id': 'agendamento.agendamento_id'
+        })
+        .join('servicos', {
+            'servico_agendamento.servicos_id': 'servicos.servicos_id'
+        })
+        .join('profissional', { 
+            'profissional.profissional_id': 'servico_agendamento.profissional_id' 
+        });
+    }
+
     async getAgendamentoProfissional(profissional_id: Number, data_atendimento: string): Promise<any[]> {
-        return await db('dbo.servico_agendamento').where({ profissional_id: profissional_id })
-        .join('dbo.agendamento', {
-            'dbo.servico_agendamento.agendamento_id': 'dbo.agendamento.agendamento_id'
+        return await db(tabelas.servico_agendamento).where({ profissional_id: profissional_id })
+        .join('agendamento', {
+            'servico_agendamento.agendamento_id': 'agendamento.agendamento_id'
         })
         .where({ data_atendimento: data_atendimento })
-        .join('dbo.servicos', {
-            'dbo.servico_agendamento.servicos_id': 'dbo.servicos.servicos_id'
+        .join('servicos', {
+            'servico_agendamento.servicos_id': 'servicos.servicos_id'
         })
         //.orderBy("horario_agendamento")
         //.select('dbo.servico_agendamento.agendamento_id', 'dbo.servicos.servicos_id')

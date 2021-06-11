@@ -22,7 +22,13 @@ class LoginController {
     // }
 
     const token = sign(
-      { userId: usuario.usuario_id, clienteId: usuario.cliente_id, profissionalId: usuario.profissional_id, funcionarioId: usuario.funcionario_id },
+      { 
+        usuarioId: usuario.usuario_id, 
+        clienteId: usuario.cliente_id, 
+        profissionalId: usuario.profissional_id, 
+        funcionarioId: usuario.funcionario_id,
+        perfilAcessoId: usuario.perfil_acesso_id
+      },
      "asd",
       {
         expiresIn: 1024,

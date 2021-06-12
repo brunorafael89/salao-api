@@ -37,8 +37,23 @@ export default class AgendamentoRepository {
         .join('servicos', {
             'servico_agendamento.servicos_id': 'servicos.servicos_id'
         })
+        .join('dbo.cliente', {
+            'dbo.agendamento.cliente_id': 'dbo.cliente.cliente_id'
+        })
         //.orderBy("horario_agendamento")
-        //.select('dbo.servico_agendamento.agendamento_id', 'dbo.servicos.servicos_id')
+        .select(
+            'dbo.cliente.cliente_id',
+            'dbo.cliente.nome as nomeCliente',
+            'dbo.agendamento.data_atendimento',
+            'dbo.agendamento.horario_agendamento',
+            'dbo.agendamento.agendamento_id',
+            'dbo.servico_agendamento.agendamento_id', 
+            'dbo.servicos.servicos_id',
+            'dbo.servicos.comissao',
+            'dbo.servicos.valor',
+            'dbo.servicos.nome as nomeServico',
+            'dbo.servicos.tempo_servico',
+        );
     }
 
     async findID(agendamento_id: number): Promise<any[]> {

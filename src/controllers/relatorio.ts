@@ -21,31 +21,17 @@ class RelatorioController {
 
   public async relatorioComissao(request: Request, response: Response): Promise<Response> {
     try{
-      const relatorios = [
-        {
-          nome: "Suellen Leite",
-          data: new Date(),
-          nome_servico: "Corte Longo",
-          valor: "40,00",
-          comissao: "50%",
-          valor_comissao: "20,00"          
-        },
-        {
-          nome: "Suellen Leite",
-          data: new Date(),
-          nome_servico: "Corte Curto",
-          valor: "20,00",
-          comissao: "50%",
-          valor_comissao: "10,00"          
-        },
-      ]
+      const profissional_id = request.body.profissional_id
+      const from = request.body.data_agendamento
+      const to = request.body.data_agendamento
 
+      const relatorios = await agendamentoRepository.relatorioComissao(profissional_id, from, to)
+      
       return response.json(relatorios);
     } catch(err){
       return response.status(500).send(err);
     }
   }
-
 }
 
 export default RelatorioController;

@@ -142,4 +142,27 @@ export default class AgendamentoRepository {
         .where({ servico_id: servico_id, profissional_id: profissional_id }).andWhereBetween('data_agendamento', [from, to]);
         //.orderBy("horario_agendamento")
     }
+
+    async relatorioComissao(profissional_id: number, from: Date, to: Date): Promise<any[]> {
+        return await db(tabelas.agendamento)
+        .select(
+            'profissional.nome as nome_profissional',
+            'agendamento.data_agendamento',
+            'servicos.nome as nome_servico',
+            'servicos.valor as valor_servico',
+            'servicos.comissao as porcentagem_comissao',
+            'ceil(valor * comissao/100) as valor_comissao'
+        )
+        .join('servico_agendamento', {
+            'servico_agendamento.agendamento_id': 'agendamento.agendamento_id'
+        })
+        .join('servicos', {
+            'servico_agendamento.servicos_id': 'servicos.servicos_id'
+        })
+        .join('profissional', { 
+            'profissional.profissional_id': 'servico_agendamento.profissional_id' 
+        })
+        .where({ profissional_id: profissional_id }).andWhereBetween('data_agendamento', [from, to]);
+        //.orderBy("data_agendamento")
+    }
 }

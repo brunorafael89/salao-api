@@ -60,9 +60,9 @@ class ClienteController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const cliente_id: number = Number(request.params.cliente_id);
-    const { nome, cpf, data_nasc, sexo, telefone, email} = request.body;
+    const { nome, data_nasc, sexo, telefone, email} = request.body;
     
-    await clienteRepository.update(cliente_id, nome, cpf, data_nasc, sexo, telefone, email);
+    await clienteRepository.update(cliente_id, nome, data_nasc, sexo, telefone, email);
    
     return response.send("Cliente atualizada com sucesso!");
   }

@@ -16,7 +16,6 @@ export default async (
       data_nasc: Yup.string().required(
         'Data de nascimento é um campo obrigatório',
       ),
-      sexo: Yup.string().required('Sexo é um campo obrigatório'),
       telefone: Yup.string().required('Telefone é um campo obrigatório'),
       email: Yup.string()
         .email('Email inválido')

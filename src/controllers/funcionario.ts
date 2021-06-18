@@ -58,9 +58,9 @@ class FuncionarioController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const funcionario_id: number = Number(request.params.funcionario_id);
-    const { cargo, nome, cpf, data_nasc, telefone, email} = request.body;
+    const { cargo, nome, data_nasc, telefone, email} = request.body;
     
-    await funcionarioRepository.update(funcionario_id, cargo, nome, cpf, data_nasc, telefone, email);
+    await funcionarioRepository.update(funcionario_id, cargo, nome, data_nasc, telefone, email);
    
     return response.send("Funcionário atualizado com sucesso!");
   }

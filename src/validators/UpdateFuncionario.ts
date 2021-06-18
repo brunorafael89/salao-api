@@ -8,15 +8,13 @@ export default async (
 ) => {
   try {
     const schema = Yup.object().shape({
+      cargo: Yup.string().required('Cargo é um campo obrigatório'),
       nome: Yup.string().required('Nome é um campo obrigatório'),
-      // cpf: Yup.string()
-      // .required('CPF é um campo obrigatório')
-        // .max(11, "O cpf só pode ter no máximo 11 números")
-        // .min(11, "O cpf deve ter no mínimo 11 números"),
+      // cpf: Yup.string().required('CPF é um campo obrigatório'),
       data_nasc: Yup.string().required(
         'Data de nascimento é um campo obrigatório',
       ),
-      sexo: Yup.string().required('Sexo é um campo obrigatório'),
+      
       telefone: Yup.string().required('Telefone é um campo obrigatório'),
       email: Yup.string()
         .email('Email inválido')

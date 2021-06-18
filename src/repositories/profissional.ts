@@ -31,13 +31,12 @@ export default class ProfissionalRepository {
         })
     }
 
-    async update(profissional_id: number, nome: string, data_nasc: string, cpf: string, telefone: string, email: string): Promise<any[]> {
+    async update(profissional_id: number, nome: string, data_nasc: string, telefone: string, email: string): Promise<any[]> {
         return await db('dbo.profissional')
             .where({ profissional_id: profissional_id })
             .update({
                 nome,
                 data_nasc: new Date(data_nasc),
-                cpf,
                 telefone,
                 email 
         })

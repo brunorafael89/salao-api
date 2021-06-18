@@ -68,9 +68,9 @@ class ProfissionalController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const profissional_id : number = Number(request.params.profissional_id );
-    const { nome, data_nasc, cpf, telefone, email} = request.body;
+    const { nome, data_nasc, telefone, email} = request.body;
     
-    await profissionalRepository.update(profissional_id , nome, data_nasc, cpf, telefone, email);
+    await profissionalRepository.update(profissional_id , nome, data_nasc, telefone, email);
    
     return response.send("Profissional atualizado com sucesso!");
   }

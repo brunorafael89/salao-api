@@ -7,9 +7,10 @@ const agendamentoRouter = Router();
 const agendamentoController = new AgendamentoController();
 
 agendamentoRouter.get('/:cliente_id', agendamentoController.show);
-agendamentoRouter.get('/:cliente_id/:data_atendimento', agendamentoController.getAgendamentoDataCliente);
+agendamentoRouter.get('/getAgendamentoCliente/:cliente_id/:data_atendimento', agendamentoController.getAgendamentoDataCliente);
 //agendamentoRouter.get('/:agendamento_id', agendamentoController.findID);
 agendamentoRouter.get('/getAgendamentoProfissional/:profissional_id/:data_atendimento', agendamentoController.getAgendamentoProfissional);
+agendamentoRouter.get('/getAgendamentoData/:data_atendimento', agendamentoController.getAgendamentoData);
 // agendamentoRouter.get('/profissional/:profissional_id/:data_atendimento', agendamentoController.getAgendamentoProfissional);
 agendamentoRouter.delete('/:agendamento_id', agendamentoController.deletar);
 agendamentoRouter.post('/', ValidatorCreateAgendamento, agendamentoController.create);

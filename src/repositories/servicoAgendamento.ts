@@ -18,9 +18,9 @@ export default class ServicoAgendamentoRepository {
         return await db('dbo.servico_agendamento').where({ profissional_id: profissional_id });
     }
 
-    // async deletar(agendamento_id: number): Promise<any[]> {
-    //     return await db('dbo.servico_agendamento').where({ agendamento_id: agendamento_id }).del();
-    // }
+    async deletar(agendamento_id: number): Promise<any[]> {
+        return await db('dbo.servico_agendamento').where({ agendamento_id: agendamento_id }).del();
+    }
 
     async create(servicos_id: number, agendamento_id: number, profissional_id: number): Promise<any[]> {
         return await db('dbo.servico_agendamento').insert({

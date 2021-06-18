@@ -23,6 +23,14 @@ class AgendamentoController {
     return response.json(agendamento);
   }
 
+  public async getAgendamentoData(request: Request, response: Response): Promise<Response> {
+    const data_atendimento: string = request.params.data_atendimento;
+    const agendamento = await agendamentoRepository.getAgendamentoData(data_atendimento);
+  
+
+    return response.json(agendamento);
+  }
+
   public async getAgendamentoProfissional(request: Request, response: Response): Promise<Response> {
     const { profissional_id, data_atendimento } = request.params;
     const agendamento = await agendamentoRepository.getAgendamentoProfissional(Number(profissional_id), data_atendimento);
@@ -41,6 +49,7 @@ class AgendamentoController {
 
   public async deletar(request: Request, response: Response): Promise<Response> {
     const agendamento_id: number = Number(request.params.agendamento_id);
+    await servicoAgendamentoRepository.deletar(agendamento_id)
     await agendamentoRepository.deletar(agendamento_id);
    
     return response.send("Agendamento excluído com sucesso!");

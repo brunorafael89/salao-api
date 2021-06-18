@@ -33,12 +33,11 @@ export default class ClienteRepository {
         }).returning('cliente_id')
     }
 
-    async update(cliente_id: number, nome: string, cpf: string, data_nasc: string, sexo: string, telefone: string, email: string): Promise<any[]> {
+    async update(cliente_id: number, nome: string, data_nasc: string, sexo: string, telefone: string, email: string): Promise<any[]> {
         return await db(tabelas.cliente)
             .where({ cliente_id: cliente_id })
             .update({
                 nome,
-                cpf,
                 data_nasc: new Date(data_nasc),
                 sexo,
                 telefone,

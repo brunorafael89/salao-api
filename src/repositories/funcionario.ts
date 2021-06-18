@@ -33,13 +33,12 @@ export default class FuncionarioRepository {
         })
     }
 
-    async update(funcionario_id: number, cargo: string, nome: string, cpf: string, data_nasc: string, telefone: string, email: string): Promise<any[]> {
+    async update(funcionario_id: number, cargo: string, nome: string, data_nasc: string, telefone: string, email: string): Promise<any[]> {
         return await db(tabelas.funcionario)
             .where({ funcionario_id: funcionario_id })
             .update({
                 cargo,
                 nome,
-                cpf,
                 data_nasc: new Date(data_nasc),
                 telefone,
                 email 

@@ -8,6 +8,6 @@ const relatorioRouter = Router();
 const relatorioController = new RelatorioController();
 
 relatorioRouter.get('/comissao', relatorioController.relatorioComissao);
-relatorioRouter.get('/servico', relatorioController.relatorioServico);
+relatorioRouter.get('/servico/:profissional_id/:servicos_id/:dataFrom/:dataTo', relatorioController.relatorioServico);
 
 export default relatorioRouter;

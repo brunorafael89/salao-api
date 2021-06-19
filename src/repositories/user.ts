@@ -1,3 +1,4 @@
+import tabelas from '../constants/tabelas';
 import db from '../database/connection';
 
 interface UsuarioProps {
@@ -15,7 +16,7 @@ export default class UsuarioRepository {
   private usuarios: UsuarioProps[] = [];
 
   async show(): Promise<any[]> {
-    return await db('dbo.cliente').where({});
+    return await db(tabelas.cliente).where({});
   }
 
   async index(email: string): Promise<UsuarioProps | undefined> {

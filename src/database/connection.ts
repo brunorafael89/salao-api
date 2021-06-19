@@ -8,10 +8,15 @@ const db = knex({
     // database: databaseConfig.database,
     // user: databaseConfig.user,
     // password: databaseConfig.password,
+    // host: "localhost",
+    // database: "projetofinalv1",
+    // user: "postgres",
+    // password: "123456",
+
     host: "localhost",
-    database: "projetofinalv1",
+    database: "teste02",
     user: "postgres",
-    password: "123456",
+    password: "raijin75716",
   },
   useNullAsDefault: true,
   debug: true

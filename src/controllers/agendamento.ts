@@ -85,6 +85,22 @@ console.log(agendamento_id)
    
     return response.send("Agendamento atualizado com sucesso!");
   }
+
+  public async iniciarAtendimento(request: Request, response: Response): Promise<Response> {
+    const agendamento_id: number = Number(request.params.agendamento_id);
+    
+    await agendamentoRepository.iniciarAtendimento(agendamento_id);
+   
+    return response.send("Atendimento iniciado com sucesso!");
+  }
+
+  public async encerrarAtendimento(request: Request, response: Response): Promise<Response> {
+    const agendamento_id: number = Number(request.params.agendamento_id);
+    
+    await agendamentoRepository.encerrarAtendimento(agendamento_id);
+   
+    return response.send("Atendimento encerrado com sucesso!");
+  }
 }
 
 export default AgendamentoController;

@@ -7,8 +7,9 @@ export default class ProfissionalFuncaoRepository {
     }
 
     async findFuncao(funcao_id: number): Promise<any[]> {
-        return await db(tabelas.profissionalFuncao).where({ funcao_id: funcao_id }).join(tabelas.profissional, { 
-            'profissional.profissional_id': 'profissionalFuncao.profissional_id' 
+        return await db(tabelas.profissionalFuncao).where({ funcao_id: funcao_id })
+        .join(tabelas.profissional, { 
+            'profissional.profissional_id': 'profissional_funcao.profissional_id' 
         });
     }
     async findProfissional(profissional_id: number): Promise<any[]> {
@@ -23,7 +24,7 @@ export default class ProfissionalFuncaoRepository {
         return await db(tabelas.profissionalFuncao).where({ funcao_id: funcao_id, profissional_id: profissional_id }).del();
     }
     async deletarPorProfissional(profissional_id: number): Promise<any[]> {
-        return await db('dbo.profissional_funcao').where({ profissional_id: profissional_id }).del();
+        return await db(tabelas.profissionalFuncao).where({ profissional_id: profissional_id }).del();
     }
 
     async create(funcao_id: number, profissional_id: number): Promise<any[]> {

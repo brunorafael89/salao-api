@@ -7,7 +7,8 @@ export default class ProfissionalFuncaoRepository {
     }
 
     async findFuncao(funcao_id: number): Promise<any[]> {
-        return await db(tabelas.profissionalFuncao).where({ funcao_id: funcao_id }).join(tabelas.profissional, { 
+        return await db(tabelas.profissionalFuncao).where({ funcao_id: funcao_id })
+        .join(tabelas.profissional, { 
             'profissional.profissional_id': 'profissional_funcao.profissional_id' 
         });
     }

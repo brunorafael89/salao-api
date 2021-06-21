@@ -26,11 +26,16 @@ class PagamentoController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { agendamento_id, forma_pagamento_id, total, autorizado } = request.body;
+    const {forma_pagamento_id, atendimentos } = request.body;
     
-    await pagamentoRepository.create(agendamento_id, forma_pagamento_id, total, autorizado);
-   
-    return response.send("Pagamento adicionado com sucesso!");
+    if (atendimentos.length){
+      atendimentos.forEach(async (atendimento: any) => {
+        await pagamentoRepository.create(atendimento.agendamento_id, forma_pagamento_id, atendimento.valor);
+      });
+      return response.send("Pagamento adicionado com sucesso!");
+    } else {
+      return response.send("Nenhum atendimento a ser pago!");
+    }
   }
 
   public async update(request: Request, response: Response): Promise<Response> {

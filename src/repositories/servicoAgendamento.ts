@@ -3,7 +3,7 @@ import db from '../database/connection';
 
 export default class ServicoAgendamentoRepository {
     async show(): Promise<any[]> {
-        return await db(tabelas.servico_agendamento).where({}).join('profissional', { 
+        return await db(tabelas.servico_agendamento).where({}).join(tabelas.profissional, { 
             'profissional.profissional_id': 'servico_agendamento.funcionario_id' 
         });
     }

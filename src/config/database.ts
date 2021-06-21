@@ -12,3 +12,10 @@ export default {
   user: "postgres",
   password: "123456",
 };
+
+// export default {
+//   host: "localhost",
+//   database: "teste02",
+//   user: "postgres",
+//   password: "raijin75716",
+// }

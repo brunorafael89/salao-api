@@ -8,8 +8,8 @@ export default async (
 ) => {
   try {
     const schema = Yup.object().shape({
-      total: Yup.number().required('Este é um campo obrigatório'), 
-      autorizado: Yup.boolean().required('Este um campo obrigatório'), 
+      forma_pagamento_id: Yup.number().required('Forma de pagamento é um campo obrigatório'), 
+      atendimentos: Yup.array().required('agendamento um campo obrigatório'), 
     });
 
     await schema.validate(request.body, { abortEarly: false });

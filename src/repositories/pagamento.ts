@@ -19,7 +19,7 @@ export default class PagamentoRepository {
             agendamento_id, 
             forma_pagamento_id, 
             total, 
-            autorizado: false
+            autorizado: true
         })
     }
 

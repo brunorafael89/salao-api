@@ -9,11 +9,15 @@ class LoginController {
   public async login(request: Request, response: Response): Promise<Response> {
     const { login, senha } = request.body;
 
-   const usuario = await usuarioRepository.findLogin(login);
+    const usuario = await usuarioRepository.findLogin(login);
 
     if (!usuario) {
       return response.status(500).send('Usuário não encontrado');
     }
+
+    if(!usuario.ativo) {
+      return response.status(500).send('Usuário inativo');
+     }
 
     const passwordMatched = await compare(senha, usuario.senha);
 

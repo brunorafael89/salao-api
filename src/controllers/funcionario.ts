@@ -28,13 +28,13 @@ class FuncionarioController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { cargo, nome, cpf, data_nasc, telefone, email, senha } = request.body;
+    const { cargo, nome, cpf, data_nasc, telefone, email, senha, perfil_id } = request.body;
 
-    const clienteEncontrado = await funcionarioRepository.findEmail(email);
+    const funcionarioEncontrado = await funcionarioRepository.findEmail(email);
 
     let msg: string[] = [];
 
-    if (clienteEncontrado)
+    if (funcionarioEncontrado)
       msg.push("O cadastro não pode ser realizado porque o email já existe.")
     
     const cpfEncontrado = await funcionarioRepository.findCpf(cpf);
@@ -50,7 +50,7 @@ class FuncionarioController {
 
     const newSenha = await hash(senha, 8);
 
-    await usuarioRepository.create(3, funcionario_id, email, newSenha); 
+    await usuarioRepository.createFunc(perfil_id, funcionario_id, email, newSenha); 
    
     return response.send("Funcionário adicionado com sucesso!");
     

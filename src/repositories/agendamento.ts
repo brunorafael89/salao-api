@@ -12,7 +12,8 @@ export default class AgendamentoRepository {
         })
         .join(tabelas.profissional, { 
             'profissional.profissional_id': 'servico_agendamento.profissional_id' 
-        });
+        })
+        .orderBy("data_atendimento", "horario_agendamento")
     }
 
     async getAgendamentoDataCliente(cliente_id: Number, data_atendimento: string): Promise<any[]> {
@@ -85,6 +86,8 @@ export default class AgendamentoRepository {
             'cliente.nome as nomeCliente',
             'agendamento.data_atendimento',
             'agendamento.horario_agendamento',
+            'agendamento.inicio_atendimento',
+            'agendamento.fim_atendimento',
             'agendamento.agendamento_id',
             'servico_agendamento.agendamento_id', 
             'servicos.servicos_id',
@@ -150,13 +153,20 @@ export default class AgendamentoRepository {
     }
 
     async relatorioServico(profissional_id: number, servicos_id: number, from: string, to: string): Promise<any[]> {
-        return await db(tabelas.servico_agendamento)        
-        .where({ "servico_agendamento.servicos_id": servicos_id, "servico_agendamento.profissional_id": profissional_id })
+        let query: any = {};
+
+        if(profissional_id) query["servico_agendamento.profissional_id"] = Number(profissional_id);
+
+        if(servicos_id) query["servico_agendamento.servicos_id"] = Number(servicos_id);
+
+        return await db(tabelas.servico_agendamento)
+        .where(query)     
+        //.where({ "servico_agendamento.servicos_id": servicos_id, "servico_agendamento.profissional_id": profissional_id })
         //.andWhereBetween('data_agendamento', [from, to])
         .join(tabelas.agendamento, {
             'servico_agendamento.agendamento_id': 'agendamento.agendamento_id'
         })
-        .andWhereBetween('data_agendamento', [from, to])
+        .andWhereBetween('data_atendimento', [from, to])
         .join(tabelas.servicos, {
             'servico_agendamento.servicos_id': 'servicos.servicos_id'
         })
@@ -172,6 +182,8 @@ export default class AgendamentoRepository {
             'agendamento.horario_agendamento',
             'servicos.servicos_id',
             'servicos.nome as nome_servico',
+            'servicos.valor',
+            'servicos.comissao',            
         )
         
         //.orderBy("horario_agendamento")

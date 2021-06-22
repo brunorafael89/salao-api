@@ -30,7 +30,7 @@ export default class FuncionarioRepository {
             data_nasc: new Date(data_nasc),
             telefone,
             email
-        })
+        }).returning('funcionario_id')
     }
 
     async update(funcionario_id: number, cargo: string, nome: string, data_nasc: string, telefone: string, email: string): Promise<any[]> {

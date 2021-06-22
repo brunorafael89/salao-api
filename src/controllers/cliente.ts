@@ -29,6 +29,13 @@ class ClienteController {
     return response.send("Cliente excluído com sucesso!");
   }
 
+  public async desativar(request: Request, response: Response): Promise<Response> {
+    const cliente_id: number = Number(request.params.cliente_id);
+    await usuarioRepository.desativar(cliente_id);
+   
+    return response.send("Cliente desatiavo com sucesso!");
+  }
+
   public async create(request: Request, response: Response): Promise<Response> {
     const { nome, cpf, data_nasc, sexo, telefone, email, senha } = request.body;
 
@@ -60,9 +67,17 @@ class ClienteController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const cliente_id: number = Number(request.params.cliente_id);
-    const { nome, data_nasc, sexo, telefone, email} = request.body;
+    const { nome, data_nasc, sexo, telefone, email, senha } = request.body;
     
     await clienteRepository.update(cliente_id, nome, data_nasc, sexo, telefone, email);
+
+    let newSenha;
+    
+    if(senha){
+      newSenha = await hash(senha, 8);
+    }
+    
+    await usuarioRepository.update(cliente_id, email, newSenha);
    
     return response.send("Cliente atualizada com sucesso!");
   }

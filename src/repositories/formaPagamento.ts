@@ -21,6 +21,7 @@ export default class FormaPagamentoRepository {
     }
 
     async update(forma_pagamento_id: number, forma_pagamento: string): Promise<any[]> {
+        console.log(forma_pagamento_id)
         return await db(tabelas.forma_pagamento)
             .where({ forma_pagamento_id: forma_pagamento_id })
             .update({

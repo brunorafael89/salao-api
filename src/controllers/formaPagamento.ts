@@ -35,18 +35,18 @@ class FormaPagamentoController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const formaPagamento = request.body.formaPagamento;
+    const forma_pagamento = request.body.forma_pagamento;
     
-    await formaPagamentoRepository.create(formaPagamento);
+    await formaPagamentoRepository.create(forma_pagamento);
    
     return response.send("Forma de pagamento adicionado com sucesso!");
   }
 
   async update(request: Request, response: Response): Promise<Response> {
-    const formaPagamento_id: number = Number(request.params.formaPagamento_id);
-    const formaPagamento = request.body.formaPagamento;
+    const forma_pagamento_id: number = Number(request.params.forma_pagamento_id);
+    const forma_pagamento = request.body.forma_pagamento;
     
-    await formaPagamentoRepository.update(formaPagamento_id, formaPagamento);
+    await formaPagamentoRepository.update(forma_pagamento_id, forma_pagamento);
    
     return response.send("Forma de pagamento atualizado com sucesso!");
   }

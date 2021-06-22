@@ -34,16 +34,46 @@ export default class UsuarioRepository {
         })
     }
 
-    async update(usuario_id: number, perfil_acesso_id: number, cliente_id: number, funcionario_id: number, profissional_id: number, login: string, senha : string): Promise<any[]> {
-        return await db(tabelas.usuario)
-            .where({ usuario_id: usuario_id })
-            .update({
-                perfil_acesso_id,
-                cliente_id,
-                funcionario_id,
-                profissional_id,
-                login,
-                senha 
+    async createFunc( perfil_acesso_id: number, funcionario_id: number,login: string, senha: string): Promise<any[]> {
+        return await db(tabelas.usuario).insert({
+            perfil_acesso_id,
+            funcionario_id,
+            login,
+            senha,
+            ativo: true
         })
+    }
+
+    // async update(usuario_id: number, perfil_acesso_id: number, cliente_id: number, funcionario_id: number, profissional_id: number, login: string, senha : string): Promise<any[]> {
+    //     return await db(tabelas.usuario)
+    //         .where({ usuario_id: usuario_id })
+    //         .update({
+    //             perfil_acesso_id,
+    //             cliente_id,
+    //             funcionario_id,
+    //             profissional_id,
+    //             login,
+    //             senha 
+    //     })
+    // }
+
+    async update(cliente_id: number, login: string, senha : string | undefined): Promise<any[]> {
+        let atualizar: any = {
+            login: login
+        };
+
+        if(senha) atualizar.senha = senha;
+
+        return await db(tabelas.usuario)
+            .where({ cliente_id: cliente_id })
+            .update(atualizar);
+    }
+
+    async desativar(cliente_id: number): Promise<any[]> {
+        return await db(tabelas.usuario)
+            .where({ cliente_id: cliente_id })
+            .update({
+                ativo: false
+            });
     }
 }

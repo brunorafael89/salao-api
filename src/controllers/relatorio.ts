@@ -6,12 +6,9 @@ const agendamentoRepository = new AgendamentoRepository();
 class RelatorioController {
   public async relatorioServico(request: Request, response: Response): Promise<Response> {    
     try{
-      const profissional_id = Number(request.params.profissional_id);
-      const servicos_id = Number(request.params.servicos_id);
-      const from = request.params.dataFrom
-      const to = request.params.dataTo
+      const { profissional_id, servicos_id, from, to } = request.body;
 
-      const relatorios = await agendamentoRepository.relatorioServico(servicos_id, profissional_id, from, to)
+      const relatorios = await agendamentoRepository.relatorioServico(profissional_id, servicos_id, from, to)
       
       return response.json(relatorios);
     } catch(err){

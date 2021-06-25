@@ -44,6 +44,16 @@ export default class UsuarioRepository {
         })
     }
 
+    async createProf( perfil_acesso_id: number, profissional_id: number,login: string, senha: string): Promise<any[]> {
+        return await db(tabelas.usuario).insert({
+            perfil_acesso_id,
+            profissional_id,
+            login,
+            senha,
+            ativo: true
+        })
+    }
+
     // async update(usuario_id: number, perfil_acesso_id: number, cliente_id: number, funcionario_id: number, profissional_id: number, login: string, senha : string): Promise<any[]> {
     //     return await db(tabelas.usuario)
     //         .where({ usuario_id: usuario_id })
@@ -74,6 +84,14 @@ export default class UsuarioRepository {
             .where({ cliente_id: cliente_id })
             .update({
                 ativo: false
+            });
+    }
+
+    async ativar(cliente_id: number): Promise<any[]> {
+        return await db(tabelas.usuario)
+            .where({ cliente_id: cliente_id })
+            .update({
+                ativo: true
             });
     }
 }

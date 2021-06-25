@@ -29,7 +29,7 @@ export default class ProfissionalRepository {
             cpf,
             telefone,
             email
-        })
+        }).returning('profissional_id')
     }
 
     async update(profissional_id: number, nome: string, data_nasc: string, telefone: string, email: string): Promise<any[]> {

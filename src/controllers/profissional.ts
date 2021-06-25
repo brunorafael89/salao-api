@@ -60,7 +60,7 @@ class ProfissionalController {
 
     const newSenha = await hash(senha, 8);
 
-    await usuarioRepository.create(2, profissional_id, email, newSenha); 
+    await usuarioRepository.createProf(2, profissional_id, email, newSenha); 
    
     return response.send("Profissional adicionado com sucesso!");
     

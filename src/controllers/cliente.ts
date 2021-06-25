@@ -33,7 +33,14 @@ class ClienteController {
     const cliente_id: number = Number(request.params.cliente_id);
     await usuarioRepository.desativar(cliente_id);
    
-    return response.send("Cliente desatiavo com sucesso!");
+    return response.send("Cliente desativado com sucesso!");
+  }
+
+  public async ativar(request: Request, response: Response): Promise<Response> {
+    const cliente_id: number = Number(request.params.cliente_id);
+    await usuarioRepository.ativar(cliente_id);
+   
+    return response.send("Cliente ativado com sucesso!");
   }
 
   public async create(request: Request, response: Response): Promise<Response> {

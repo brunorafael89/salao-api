@@ -25,7 +25,7 @@ class FormaPagamentoController {
 
   public async deletar(request: Request, response: Response): Promise<Response> {
     try{
-      const formaPagamento_id: number = Number(request.params.formaPagamento_id);
+      const formaPagamento_id: number = Number(request.params.forma_pagamento_id);
       await formaPagamentoRepository.deletar(formaPagamento_id);
     
       return response.send("Forma de pagamento excluído com sucesso!");

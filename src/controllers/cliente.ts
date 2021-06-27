@@ -14,12 +14,18 @@ class ClienteController {
     return response.json(clientes);
   }
 
-  
   public async findID(request: Request, response: Response): Promise<Response> {
     const cliente_id: number = Number(request.params.cliente_id);
     const clientes = await clienteRepository.findID(cliente_id);
    
     return response.json(clientes);
+  }
+
+  public async findNome(request: Request, response: Response): Promise<Response> {
+    const nome: string = String(request.params.nome);
+    const clientes = await clienteRepository.findNome(nome)
+
+    return response.json(clientes)
   }
 
   public async deletar(request: Request, response: Response): Promise<Response> {

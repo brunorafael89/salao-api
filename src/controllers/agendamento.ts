@@ -23,6 +23,13 @@ class AgendamentoController {
     return response.json(agendamento);
   }
 
+  public async getJaFezAgendamentos(request: Request, response: Response): Promise<Response> {
+    const cliente_id: number = Number(request.params.cliente_id);
+    const agendamento = await agendamentoRepository.getJaFezAgendamentos(cliente_id);
+  
+    return response.json(agendamento);
+  }
+
   public async getAgendamentoData(request: Request, response: Response): Promise<Response> {
     const data_atendimento: string = request.params.data_atendimento;
     const agendamento = await agendamentoRepository.getAgendamentoData(data_atendimento);

@@ -29,6 +29,14 @@ export default class AgendamentoRepository {
         });
     }
 
+    async getJaFezAgendamentos(cliente_id: Number): Promise<any[]> {
+        return await db(tabelas.agendamento).where({ cliente_id: cliente_id})
+        .rightJoin(tabelas.pagamento, {
+            'agendamento.agendamento_id': 'pagamento.agendamento_id'
+        })
+        .count();
+    }
+
     async getAgendamentoProfissional(profissional_id: Number, data_atendimento: string): Promise<any[]> {
         return await db(tabelas.servico_agendamento).where({ profissional_id: profissional_id })
         .join(tabelas.agendamento, {
@@ -84,6 +92,7 @@ export default class AgendamentoRepository {
         .select(
             'cliente.cliente_id',
             'cliente.nome as nomeCliente',
+            'cliente.data_nasc',
             'agendamento.data_atendimento',
             'agendamento.horario_agendamento',
             'agendamento.inicio_atendimento',

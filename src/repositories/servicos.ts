@@ -14,6 +14,10 @@ export default class ServicosRepository {
         return await db(tabelas.servicos).where({ nome }).first();
     }
 
+    async findPesquisa(nome: string): Promise<any[]> {
+        return await db(tabelas.servicos).where({ nome });
+    }
+
     async deletar(servicos_id: number): Promise<any[]> {
         return await db(tabelas.servicos).where({ servicos_id: servicos_id }).del();
     }

@@ -22,6 +22,13 @@ class ClienteController {
     return response.json(clientes);
   }
 
+  public async findNome(request: Request, response: Response): Promise<Response> {
+    const nome: string = String(request.params.nome);
+    const clientes = await clienteRepository.findNome(nome)
+
+    return response.json(clientes)
+  }
+
   public async deletar(request: Request, response: Response): Promise<Response> {
     const cliente_id: number = Number(request.params.cliente_id);
     await clienteRepository.deletar(cliente_id);
@@ -84,7 +91,7 @@ class ClienteController {
       newSenha = await hash(senha, 8);
     }
     
-    await usuarioRepository.update(cliente_id, email, newSenha);
+    await usuarioRepository.updateCliente(cliente_id, email, newSenha);
    
     return response.send("Cliente atualizada com sucesso!");
   }

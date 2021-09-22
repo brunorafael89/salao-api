@@ -30,7 +30,7 @@ class FormaPagamentoController {
     
       return response.send("Forma de pagamento excluído com sucesso!");
     } catch(err){
-      return response.status(500).send(err);
+      return response.status(400).send("Forma de pagamento não pode ser exluído, possui pagamento efetuado");
     }
   }
 

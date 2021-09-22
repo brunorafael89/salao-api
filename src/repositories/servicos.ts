@@ -11,7 +11,7 @@ export default class ServicosRepository {
     }
 
     async findNome(nome: string): Promise<any[]> {
-        return await db(tabelas.servicos).where({ nome }).first();
+        return await db(tabelas.servicos).where({ nome });
     }
 
     async findPesquisa(nome: string): Promise<any[]> {

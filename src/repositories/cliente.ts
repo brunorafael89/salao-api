@@ -16,6 +16,10 @@ export default class ClienteRepository {
         return await db(tabelas.cliente).where({ cliente_id: cliente_id }).first();
     }
 
+    async findNome(nome: string): Promise<any[]> {
+        return await db(tabelas.cliente).where({ nome });
+    }
+
     async findEmail(email: string): Promise<any[]> {
         return await db(tabelas.cliente).where({ email }).first();
     }

@@ -14,7 +14,6 @@ class ClienteController {
     return response.json(clientes);
   }
 
-  
   public async findID(request: Request, response: Response): Promise<Response> {
     const cliente_id: number = Number(request.params.cliente_id);
     const clientes = await clienteRepository.findID(cliente_id);

@@ -13,10 +13,14 @@ const db = knex({
     // user: "postgres",
     // password: "123456",
 
+    // host: "localhost",
+    // database: "teste02",
+    // user: "postgres",
+    // password: "raijin75716",
     host: "localhost",
-    database: "teste02",
+    database: "projetofinalv1",
     user: "postgres",
-    password: "raijin75716",
+    password: "123456",
   },
   useNullAsDefault: true,
   debug: true

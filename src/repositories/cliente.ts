@@ -1,11 +1,8 @@
 import db from '../database/connection';
 import tabelas from "../constants/tabelas";
-// import UsuarioRepository from '../repositories/usuario';
 
 export default class ClienteRepository {
     async show(): Promise<any[]> {
-        // return await db(tabelas.cliente).where({});
-
         return await db(tabelas.cliente).where({})
         .join(tabelas.usuario, { 
             'usuario.cliente_id': 'cliente.cliente_id' 
@@ -26,10 +23,6 @@ export default class ClienteRepository {
 
     async findCpf(cpf: string): Promise<any[]> {
         return await db(tabelas.cliente).where({ cpf }).first();
-    }
-
-    async findNome(nome: string): Promise<any[]> {
-        return await db(tabelas.cliente).where({ nome });
     }
 
     async deletar(cliente_id: number): Promise<any[]> {

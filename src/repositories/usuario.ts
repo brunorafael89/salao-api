@@ -14,10 +14,6 @@ export default class UsuarioRepository {
         return await db(tabelas.usuario).where({ login }).first();
     }
 
-    // async deletar(usuario_id: number): Promise<any[]> {
-    //     return await db('dbo.usuario').where({ usuario_id: usuario_id }).del();
-    // }
-
     async deletar(usuario_id: number): Promise<any[]> {
         return await db(tabelas.usuario)
             .where({ usuario_id: usuario_id })

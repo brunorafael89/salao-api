@@ -3,7 +3,6 @@ import UsuarioController from '../controllers/usuario';
 import ValidatorCreateUsuario from '../validators/CreateUsuario'
 
 const usuarioRouter = Router();
-
 const usuarioController = new UsuarioController();
 
 usuarioRouter.get('/', usuarioController.show);

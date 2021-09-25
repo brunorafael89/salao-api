@@ -136,10 +136,8 @@ export default class AgendamentoRepository {
 
     async create(funcionario_id: number, cliente_id: number, data_atendimento: Date, inicio_atendimento: Date, total: number, data_agendamento: Date, horario_agendamento: Date): Promise<any> {
         return await db(tabelas.agendamento).insert({
-            //funcionario_id,
             cliente_id,
             data_atendimento: new Date(data_atendimento),
-            //inicio_atendimento: new Date(inicio_atendimento),
             total,
             data_agendamento: new Date(data_agendamento),
             horario_agendamento: horario_agendamento,
@@ -170,8 +168,6 @@ export default class AgendamentoRepository {
 
         return await db(tabelas.servico_agendamento)
         .where(query)     
-        //.where({ "servico_agendamento.servicos_id": servicos_id, "servico_agendamento.profissional_id": profissional_id })
-        //.andWhereBetween('data_agendamento', [from, to])
         .join(tabelas.agendamento, {
             'servico_agendamento.agendamento_id': 'agendamento.agendamento_id'
         })
@@ -193,9 +189,7 @@ export default class AgendamentoRepository {
             'servicos.nome as nome_servico',
             'servicos.valor',
             'servicos.comissao',            
-        )
-        
-        //.orderBy("horario_agendamento")
+        )        
     }
 
     async relatorioComissao(profissional_id: number, from: Date, to: Date): Promise<any[]> {
@@ -218,6 +212,5 @@ export default class AgendamentoRepository {
             'profissional.profissional_id': 'servico_agendamento.profissional_id' 
         })
         .where({ profissional_id: profissional_id }).andWhereBetween('data_agendamento', [from, to]);
-        //.orderBy("data_agendamento")
     }
 }

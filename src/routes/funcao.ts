@@ -3,7 +3,6 @@ import FuncaoController from '../controllers/funcao';
 import ValidatorCreateFuncao from '../validators/CreateFuncao'
 
 const funcaoRouter = Router();
-
 const funcaoController = new FuncaoController();
 
 funcaoRouter.get('/', funcaoController.show);

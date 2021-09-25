@@ -18,13 +18,6 @@ class ServicosController {
     return response.json(servicos);
   }
 
-  // public async findNome(request: Request, response: Response): Promise<Response> {
-  //   const nome: string = String (request.params.nome);
-  //   const servicos = await servicosRepository.findNome(nome);
-   
-  //   return response.json(servicos);
-  // }
-
   public async findPesquisa(request: Request, response: Response): Promise<Response> {
     const nome: string = String (request.params.nome);
     const servicos = await servicosRepository.findPesquisa(nome);

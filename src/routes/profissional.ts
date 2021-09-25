@@ -4,7 +4,6 @@ import ValidatorCreateProfissional from '../validators/CreateProfissional'
 import ValidatorUpdateProfissional from '../validators/UpdateProfissional'
 
 const profissionalRouter = Router();
-
 const profissionalController = new ProfissionalController();
 
 profissionalRouter.get('/', profissionalController.show);

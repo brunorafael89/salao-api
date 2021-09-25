@@ -4,7 +4,6 @@ import ValidatorCreateCliente from '../validators/CreateCliente'
 import ValidatorUpdateCliente from '../validators/UpdateCliente'
 
 const clienteRouter = Router();
-
 const clienteController = new ClienteController();
 
 clienteRouter.get('/', clienteController.show);

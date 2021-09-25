@@ -2,7 +2,6 @@ import { Router } from 'express';
 import PerfilAcessoController from '../controllers/perfilAcesso';
 
 const clienteRouter = Router();
-
 const perfilAcessoController = new PerfilAcessoController();
 
 clienteRouter.get('/', perfilAcessoController.show);

@@ -3,7 +3,6 @@ import PagamentoController from '../controllers/pagamento';
 import ValidatorCreatePagamento from '../validators/CreatePagamento'
 
 const pagamentoRouter = Router();
-
 const pagamentoController = new PagamentoController();
 
 pagamentoRouter.get('/', pagamentoController.show);

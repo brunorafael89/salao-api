@@ -9,7 +9,6 @@ export default async (
   try {
     const schema = Yup.object().shape({
       data_atendimento: Yup.string().required('Data é um campo obrigatório'),
-      // inicio_atendimento: Yup.string().required('inicio do atendimento é um campo obrigatório'),
       data_agendamento: Yup.string().required(
         'Data do atendimento é um campo obrigatório',
       ),
@@ -26,4 +25,3 @@ export default async (
       .json({ error: 'Campos inválidos', messages: err.inner });
   }
 };
-
